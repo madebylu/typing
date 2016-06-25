@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing practice by Lu</title>
+  <!--Styles-->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/words.css">
+  <!--Scripts-->
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div id="display_text">
+            <span id="current_word"></span>
+            <span id="next_word"></span>
+          </div>
+          <input type="text" id="user_input" />
+          <p><span id="spree-ended">Spree over. Get the word right twice to continue</span>&nbsp;</p>
+        </div>
+
+        <div id="settings" class="col-sm-4">
+          <div><h2>Difficulty:</h2>
+            <p><span id="difficulty_number">20000</span> possible words</p>
+            <input type="range" min="100" max="20000" step="10" value="20000" id="number_of_possible_words"></input></div>
+        </div>
+      </div>
+      <div id="stats" class="row">
+        <div class="col-sm-4">
+          Current spree: <span id="correct_words_spree"></span>
+        </div>
+        <div class="col-sm-4">
+          Total typed: <span id="correct_words_count">0</span>
+        </div>
+        <div class="col-sm-4">
+          Words per min: <span id="wpm"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Instructions</h2>
+          <p>Type the underlined word on the left into the box and press space when you're done. If you got it right the word
+          on the right will move over. If you go wrong the input will reset and you have to start over and get the word right
+          twice before you can continue.</p>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="js/words_list.js"></script>
+    <script src="js/words.js"></script>
+</body>
+</html>
