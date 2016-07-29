@@ -38,7 +38,7 @@ $(function() {
     $('#correct_words_total').text(correct_words_total);
     $('#current_spree').text(current_spree);
     $('#best_spree').text(best_spree);
-    var accuracy = 100 * correct_words_total / ( correct_words_total + incorrect_words_total);
+    var accuracy = incorrect_words_total == 0 ? 0 : 100 * correct_words_total / ( correct_words_total + incorrect_words_total);
     $('#accuracy').text(accuracy.toFixed(0));
   }
 
