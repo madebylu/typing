@@ -3,12 +3,15 @@
 $(function() {
   var current_word = get_a_word();
   var next_word = get_a_word();
-  var correct_words_count = 0;
-  var correct_words_spree = 0;
+  var correct_words_total = 0;
+  var incorrect_words_total = 0;
+  var current_spree = 0;
+  var best_spree = 0;
   var current_typing;
-  var word_range = 20000; //max size of the array of words.
+  var word_range = $('#difficulty_number').val();
   var started = false;
   var run_time = 0;
+  var session_run_time = 0;
   var timer = setInterval(wpm_timer, 1000);
 
   //currently selecting with uniform distribution from the first n words
@@ -23,8 +26,8 @@ $(function() {
     $('#user_input').val('');
     current_word = next_word;
     next_word = get_a_word();
-    correct_words_count++;
-    correct_words_spree++;
+    correct_words_total++;
+    current_spree++;
     calc_wpm();
   }
 
@@ -32,18 +35,24 @@ $(function() {
   function update_page(){
     $('#current_word').text(current_word);
     $('#next_word').text(next_word);
-    $('#correct_words_count').text(correct_words_count);
-    $('#correct_words_spree').text(correct_words_spree);
+    $('#correct_words_total').text(correct_words_total);
+    $('#current_spree').text(current_spree);
+    $('#best_spree').text(best_spree);
+    var accuracy = 100 * correct_words_total / ( correct_words_total + incorrect_words_total);
+    $('#accuracy').text(accuracy.toFixed(0));
   }
 
   function calc_wpm(){
-    var wpm = correct_words_count / run_time * 60;
+    var wpm = current_spree / run_time * 60;
+    var session_wpm = correct_words_total / session_run_time * 60;
+    $('#session_wpm').text(session_wpm.toFixed(2));
     $('#wpm').text(wpm.toFixed(2));
   }
 
   function wpm_timer(){
     if (started){
       run_time++;
+      session_run_time++;
     }
   }
 
@@ -66,7 +75,10 @@ $(function() {
       $('#spree-ended').show();
       $('#spree-ended').fadeOut(3000);
       next_word = current_word;
-      correct_words_spree = 0;
+      current_spree > best_spree ? best_spree = current_spree : true;
+      current_spree = 0;
+      run_time = 0;
+      incorrect_words_total++;
     }
     update_page();
   });

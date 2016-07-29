@@ -26,19 +26,32 @@
 
         <div id="settings" class="col-sm-4">
           <div><h2>Difficulty:</h2>
-            <p><span id="difficulty_number">20000</span> possible words</p>
-            <input type="range" min="100" max="20000" step="10" value="20000" id="number_of_possible_words"></input></div>
+            <p><span id="difficulty_number">10000</span> possible words</p>
+            <input type="range" min="100" max="20000" step="10" value="10000" id="number_of_possible_words"></input></div>
         </div>
       </div>
       <div id="stats" class="row">
-        <div class="col-sm-4">
-          Current spree: <span id="correct_words_spree"></span>
+        <div class="col-sm-6">
+	<h3>Current Run</h3>
+	  <dl class="dl-horizontal">
+          <dt>Current spree:</dt> 
+	  <dd><span id="current_spree"></span></dd>
+          <dt>Words per min:</dt> 
+	  <dd><span id="wpm">0</span></dd>
+	  </dl>
         </div>
-        <div class="col-sm-4">
-          Total typed: <span id="correct_words_count">0</span>
-        </div>
-        <div class="col-sm-4">
-          Words per min: <span id="wpm"></span>
+        <div class="col-sm-6">
+	  <h3>This Session</h3>
+	  <dl class="dl-horizontal">
+          <dt>Best spree:</dt> 
+	  <dd><span id="best_spree">0</span></dd>
+          <dt>Total typed:</dt> 
+	  <dd><span id="correct_words_total">0</span><dd>
+          <dt>Words per min:</dt> 
+	  <dd><span id="session_wpm">0</span></dd>
+          <dt>Accuracy:</dt> 
+	  <dd><span id="accuracy">100</span>%</dd>
+	  </dl>
         </div>
       </div>
       <div class="row">
