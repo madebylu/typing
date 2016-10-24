@@ -1,6 +1,8 @@
 //this file references an array defined in words_list.js
 
 $(function() {
+  var append_period = false;
+  var capitalise_next = true;
   var current_word = get_a_word();
   var next_word = get_a_word();
   var correct_words_total = 0;
@@ -18,7 +20,21 @@ $(function() {
   // where n is the 'difficulty' and is an int less than 20k.
   function get_a_word(){
       word_range = $('#number_of_possible_words').val();
-      return words[Math.floor(Math.random()*word_range)];
+      var word = words[Math.floor(Math.random()*word_range)];
+      var randomiser = Math.random()*10;
+      if (!capitalise_next && !append_period && randomiser < 1) {
+        append_period = true;
+      }
+      if (capitalise_next) {
+        word = word.charAt(0).toUpperCase() + word.slice(1);
+        capitalise_next = false;
+      } 
+      if (append_period) {
+        word = word + ".";
+        append_period = false;
+        capitalise_next = true;
+      }
+      return word;
   }
 
   //to be called when a correct word is entered
