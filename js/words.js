@@ -1,6 +1,8 @@
 //this file references an array defined in words_list.js
 
 $(function() {
+  var allow_corrections = $('#allow_corrections').is(':checked');
+  console.log(allow_corrections);
   var append_period = false;
   var capitalise_next = true;
   var current_word = get_a_word();
@@ -28,7 +30,7 @@ $(function() {
       if (capitalise_next) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
         capitalise_next = false;
-      } 
+      }
       if (append_period) {
         word = word + ".";
         append_period = false;
@@ -87,10 +89,12 @@ $(function() {
       correct_word();
     } else {
       $('#current_word').addClass('incorrect');
-      $('#user_input').val('');
       $('#spree-ended').show();
       $('#spree-ended').fadeOut(3000);
-      next_word = current_word;
+      if (!allow_corrections){
+        $('#user_input').val('');
+        next_word = current_word;
+      }
       current_spree > best_spree ? best_spree = current_spree : true;
       current_spree = 0;
       run_time = 0;
@@ -109,6 +113,11 @@ $(function() {
     started = false;
     update_page();
     $('#difficulty_number').text($(this).val());
+    $('#user_input').focus();
+  });
+
+  $('#allow_corrections').on('change', function(e){
+    allow_corrections = $('#allow_corrections').is(':checked');
     $('#user_input').focus();
   });
 
